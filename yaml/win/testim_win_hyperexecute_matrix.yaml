@@ -27,4 +27,4 @@ cacheDirectories:
   - node_modules
 
 testSuites:
-  - testim run $test --project QY4Sh8zvp1qo88ZrGuZJ --token ${env:testim_token} --host 127.0.0.1 --protocol http --port 4449 --browser firefox --grid-username ${env:LT_USERNAME} --grid-password ${env:LT_ACCESS_KEY} --selenium-caps-file caps.json
+  - testim run $test --project <your_testim_project_id_here> --token ${env:testim_token} --host 127.0.0.1 --protocol http --port 4449 --browser firefox --grid-username ${env:LT_USERNAME} --grid-password ${env:LT_ACCESS_KEY} --selenium-caps-file caps.json

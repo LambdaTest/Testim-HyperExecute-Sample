@@ -25,4 +25,4 @@ testDiscovery:
   mode: dynamic
   command: grep -lr 'test' tests
 
-testRunnerCommand: testim run $test --project QY4Sh8zvp1qo88ZrGuZJ --token ${testim_token} --host 127.0.0.1 --protocol http --port 4449 --browser firefox --grid-username ${LT_USERNAME} --grid-password ${LT_ACCESS_KEY} --selenium-caps-file caps.json
+testRunnerCommand: testim run $test --project <your_testim_project_id_here> --token ${testim_token} --host 127.0.0.1 --protocol http --port 4449 --browser firefox --grid-username ${LT_USERNAME} --grid-password ${LT_ACCESS_KEY} --selenium-caps-file caps.json
