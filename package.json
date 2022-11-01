@@ -1,0 +1,23 @@
+{
+  "name": "sample_project_lt",
+  "version": "0.1.0",
+  "description": "https://help.testim.io/docs/",
+  "dependencies": {
+    "testim": "latest",
+    "@testim/testim-cli": "latest",
+    "@types/chai": "4.3.0",
+    "chai": "4.3.6",
+    "cross-env": "7.0.3"
+  },
+  "scripts": {
+    "start": "cross-env NODE_OPTIONS=--max-old-space-size=8196 testim run \"./tests/**/*.test.js\" --require-credentials",
+    "test": "npm start",
+    "lt": "testim run sample_project_lt/tests/examples/02-using-locators.test.js --token 'gXj5m6d7AXP71gi5WQwEKgQ1Hfn1OvidEIjbvrP4lWWwwxeEuG' --host hub.lambdatest.com --port 80 --path /wd/hub --grid-username $LT_USERNAME --grid-password $LT_ACCESS_KEY --browser firefox --project 'QY4Sh8zvp1qo88ZrGuZJ'",
+    "dev-test": "cross-env NODE_OPTIONS=--max-old-space-size=8196 testim run \"./tests/**/*.test.js\" --require-credentials --reporters=chrome,console",
+    "debug": "cross-env NODE_OPTIONS=--max-old-space-size=8196 testim --inspect 9229 run \"./tests/examples/*.test.js\" --require-credentials",
+    "debug-file": "cross-env NODE_OPTIONS=--max-old-space-size=8196 testim --inspect 9229 --require-credentials run",
+    "debug-examples": "cross-env NODE_OPTIONS=--max-old-space-size=8196 testim --inspect 9229 run \"./tests/examples/*.test.js\" --require-credentials",
+    "headless": "cross-env NODE_OPTIONS=--max-old-space-size=8196 testim --inspect 9229 run \"./tests/**/*.test.js\" --require-credentials --headless",
+    "ci": "cross-env NODE_OPTIONS=--max-old-space-size=8196 testim run \"./tests/**/*.test.js\" --grid testim-grid"
+  }
+}

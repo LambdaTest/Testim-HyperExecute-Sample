@@ -1,0 +1,30 @@
+---
+version: "0.1"
+globalTimeout: 90
+testSuiteTimeout: 90
+testSuiteStep: 90
+runson: win
+retryOnFailure: false
+maxRetries: 1
+concurrency: 2
+
+env:
+  testim_token: ${{ .secrets.TESTIM_API }}
+
+matrix:
+  test:
+    [
+      "tests/examples/01-simple-text-validation.test.js",
+      "tests/examples/02-using-locators.test.js",
+    ]
+
+pre:
+  - npm i @testim/testim-cli -g
+  - npm install
+
+cacheKey: '{{ checksum "package-lock.json" }}'
+cacheDirectories:
+  - node_modules
+
+testSuites:
+  - testim run $test --project QY4Sh8zvp1qo88ZrGuZJ --token ${env:testim_token} --host 127.0.0.1 --protocol http --port 4449 --browser firefox --grid-username ${env:LT_USERNAME} --grid-password ${env:LT_ACCESS_KEY} --selenium-caps-file caps.json
