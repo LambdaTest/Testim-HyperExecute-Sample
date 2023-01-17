@@ -132,7 +132,7 @@ concurrency: 4
 
 ### Pre Steps and Dependency Caching
 
-Dependency caching is enabled in the YAML file to ensure that the package dependencies are not downloaded in subsequent runs. The first step is to set the Key used to cache directories. The directory _m2_cache_dir_ is created in the project's root directory.
+Dependency caching is enabled in the YAML file to ensure that the package dependencies are not downloaded in subsequent runs. The first step is to set the Key used to cache directories. The directory _node_modules_ is created in the project's root directory.
 
 ```yaml
 # Dependency caching for Windows
@@ -141,7 +141,7 @@ cacheDirectories:
   - node_modules
 ```
 
-Steps (or commands) that must run before the test execution are listed in the _pre_ run step. In the example, the Maven packages are downloaded in the _m2_cache_dir_. To prevent test execution at the _pre_ stage, the _maven.test.skip_ parameter is set to _true_ so that only packages are downloaded and no test execution is performed.
+Steps (or commands) that must run before the test execution are listed in the _pre_ run step. In the example, the Node packages are downloaded in the _node_modules_. 
 
 ```yaml
 pre:
@@ -158,7 +158,7 @@ post:
   - cat yaml/win/testim_win_hyperexecute_autosplit.yaml
 ```
 
-The _testDiscovery_ directive contains the command that gives details of the mode of execution, along with detailing the command that is used for test execution. Here, we are fetching the list of class names that would be further passed in the _testRunnerCommand_
+The _testDiscovery_ directive contains the command that gives details of the mode of execution, along with detailing the command that is used for test execution. Here, we are fetching the list of js test files that would be further passed in the _testRunnerCommand_
 
 ```yaml
 testDiscovery:
@@ -178,7 +178,7 @@ Running the above command on the terminal will give a list of scenarios present 
 The _testRunnerCommand_ contains the command that is used for triggering the test. The output fetched from the _testDiscoverer_ command acts as an input to the _testRunner_ command.
 
 ```yaml
-testRunnerCommand: testim run $test  --project QY4Sh8zvp1qo88ZrGuZJ --token $env:testim_token --host 127.0.0.1 --protocol http --port 4449 --browser firefox --grid-username $env:LT_USERNAME --grid-password $env:LT_ACCESS_KEY --selenium-caps-file caps.json
+testRunnerCommand: testim run $test  --project <your_project_id> --token $env:testim_token --host 127.0.0.1 --protocol http --port 4449 --browser firefox --grid-username $env:LT_USERNAME --grid-password $env:LT_ACCESS_KEY --selenium-caps-file caps.json
 ```
 
 ### Test Execution
@@ -187,7 +187,7 @@ The CLI option _--config_ is used for providing the custom HyperExecute YAML fil
 
 #### Execute testim tests using Autosplit mechanism on Windows platform
 
-Run the following command on the terminal to trigger the tests in Java files with HyperExecute platform set to Windows. The _--download-artifacts_ option is used to inform HyperExecute to download the artifacts for the job. The _--force-clean-artifacts_ option force cleans any existing artifacts for the project.
+Run the following command on the terminal to trigger the testim tests with HyperExecute platform set to Windows. The _--download-artifacts_ option is used to inform HyperExecute to download the artifacts for the job. The _--force-clean-artifacts_ option force cleans any existing artifacts for the project.
 
 ```bash
 ./hyperexecute --config yaml/win/testim_win_hyperexecute_autosplit_.yaml --force-clean-artifacts --download-artifacts
@@ -195,7 +195,7 @@ Run the following command on the terminal to trigger the tests in Java files wit
 
 #### Execute testim tests using Autosplit mechanism on Linux platform
 
-Run the following command on the terminal to trigger the tests in Java files with HyperExecute platform set to Linux. The _--download-artifacts_ option is used to inform HyperExecute to download the artifacts for the job. The _--force-clean-artifacts_ option force cleans any existing artifacts for the project.
+Run the following command on the terminal to trigger the testim tests with HyperExecute platform set to Linux. The _--download-artifacts_ option is used to inform HyperExecute to download the artifacts for the job. The _--force-clean-artifacts_ option force cleans any existing artifacts for the project.
 
 ```bash
 ./hyperexecute --config yaml/linux/testim_linux_hyperexecute_autosplit_.yaml --force-clean-artifacts --download-artifacts
@@ -244,16 +244,16 @@ matrix:
     ]
 ```
 
-The _testSuites_ object contains a list of commands (that can be presented in an array). In the current YAML file, commands for executing the tests are put in an array (with a '-' preceding each item). The Maven command _mvn test_ is used to run tests located in the current project. In the current project, parallel execution is achieved at the _class_ level. The _maven.repo.local_ parameter in Maven is used for overriding the location where the dependent Maven packages are downloaded.
+The _testSuites_ object contains a list of commands (that can be presented in an array). In the current YAML file, commands for executing the tests are put in an array (with a '-' preceding each item).
 
 ```yaml
 testSuites:
-  - testim run $test --project QY4Sh8zvp1qo88ZrGuZJ --token ${env:testim_token} --host 127.0.0.1 --protocol http --port 4449 --browser firefox --grid-username ${env:LT_USERNAME} --grid-password ${env:LT_ACCESS_KEY} --selenium-caps-file caps.json
+  - testim run $test --project <your_project_id> --token ${env:testim_token} --host 127.0.0.1 --protocol http --port 4449 --browser firefox --grid-username ${env:LT_USERNAME} --grid-password ${env:LT_ACCESS_KEY} --selenium-caps-file caps.json
 ```
 
 ### Pre Steps and Dependency Caching
 
-Dependency caching is enabled in the YAML file to ensure that the package dependencies are not downloaded in subsequent runs. The first step is to set the Key used to cache directories. The directory _m2_cache_dir_ is created in the project's root directory.
+Dependency caching is enabled in the YAML file to ensure that the package dependencies are not downloaded in subsequent runs. The first step is to set the Key used to cache directories. The directory _node_modules_ is created in the project's root directory.
 
 ```yaml
 # Dependency caching for Windows
@@ -262,7 +262,7 @@ cacheDirectories:
   - node_modules
 ```
 
-Steps (or commands) that must run before the test execution are listed in the _pre_ run step. In the example, the Maven packages are downloaded in the _m2_cache_dir_. To prevent test execution at the _pre_ stage, the _maven.test.skip_ parameter is set to _true_ so that only packages are downloaded and no test execution is performed.
+Steps (or commands) that must run before the test execution are listed in the _pre_ run step. In the example, the Node packages are downloaded in the _node_modules_. 
 
 ```yaml
 pre:
@@ -285,7 +285,7 @@ The CLI option _--config_ is used for providing the custom HyperExecute YAML fil
 
 #### Execute testim tests using Matrix mechanism on Windows platform
 
-Run the following command on the terminal to trigger the tests in Java files with HyperExecute platform set to Windows. The _--download-artifacts_ option is used to inform HyperExecute to download the artifacts for the job. The _--force-clean-artifacts_ option force cleans any existing artifacts for the project.
+Run the following command on the terminal to trigger the testim tests with HyperExecute platform set to Windows. The _--download-artifacts_ option is used to inform HyperExecute to download the artifacts for the job. The _--force-clean-artifacts_ option force cleans any existing artifacts for the project.
 
 ```bash
 ./hyperexecute --config yaml/win/testim_win_hyperexecute_matrix_.yaml --force-clean-artifacts --download-artifacts
@@ -293,7 +293,7 @@ Run the following command on the terminal to trigger the tests in Java files wit
 
 #### Execute testim tests using Autosplit mechanism on Linux platform
 
-Run the following command on the terminal to trigger the tests in Java files with HyperExecute platform set to Linux. The _--download-artifacts_ option is used to inform HyperExecute to download the artifacts for the job. The _--force-clean-artifacts_ option force cleans any existing artifacts for the project.
+Run the following command on the terminal to trigger the testim tests with HyperExecute platform set to Linux. The _--download-artifacts_ option is used to inform HyperExecute to download the artifacts for the job. The _--force-clean-artifacts_ option force cleans any existing artifacts for the project.
 
 ```bash
 ./hyperexecute --config yaml/linux/testim_linux_hyperexecute_matrix_.yaml --force-clean-artifacts --download-artifacts
